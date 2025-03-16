@@ -9,7 +9,7 @@
  // Your web app's Firebase configuration
  
  const firebaseConfig = {
-    apiKey: "AIzaSyBsJuhZqpQGzIiBb5borCa9odEfVSI9xmY",
+    apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx", // replaced it becuase of security purposes just replace by your api key
     authDomain: "krishi-7a663.firebaseapp.com",
     projectId: "krishi-7a663",
     storageBucket: "krishi-7a663.firebasestorage.app",
