@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom to Disease Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        label, select, input, button, ul {
+            display: block;
+            margin: 10px 0;
+        }
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .recommendation {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: -5px;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #ecf0f1;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        ul li:nth-child(odd) {
+            background: #e8ecef;
+        }
+        ul li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Symptom to Disease Checker</h1>
+    <label for="animalType">Select Animal Type:</label>
+    <select id="animalType" onchange="updateSymptomsDropdown()">
+        <option value="cattle">CATTLE</option>
+        <option value="goat">Goat</option>
+        <option value="polutry">Polutry</option>
+    </select>
+
+    <label for="symptomDropdown">Select Symptoms:</label>
+    <select id="symptomDropdown" multiple>
+        <option value="">-- Select Symptoms --</option>
+    </select>
+
+    <label for="manualInput">Or Enter Symptoms Manually (comma-separated):</label>
+    <input type="text" id="manualInput" placeholder="e.g., fever, drooling">
+
+    <button onclick="checkDisease()">Check Possible Diseases</button>
+
+    <h2>Possible Diseases:</h2>
+    <ul id="diseaseList"></ul>
+
+    <script>
+        const symptomDiseaseParagraphs = {
+            cattle: `
+                slobbering :Foot and Mouth Disease;
+                fever:Anthrax,Hemorrhagic Septicemia,Black Quarter,Milk Fever,Foot and Mouth Disease;
+                smacking lips:Foot and Mouth Disease;
+                lameness:Foot and Mouth Disease (FMD),Black Quarter,lumpy skin disease;
+                drooling:Foot and Mouth Disease (FMD);
+                loss of appetite:Foot and Mouth Disease (FMD),Milk Fever,blackleg,bovine respiratiry disease;
+                sudden death:Anthrax,Black Quarter,blackleg,bovine viral diarrhea;
+                difficulty Breathing:Anthrax,Hemorrhagic Septicemia,bovine tuberculosis,theileriosis;
+                weakness:Hemorrhagic Septicemia,Milk Fever,paratuberculosis,theileriosis;
+                lethargy:Hemorrhagic Septicemia,Milk Fever,bovine tuberculosis,bovine respiratiry disease,theileriosis;
+                rapid breathing:Hemorrhagic Septicemia,bovine respiratiry disease;
+                inability to stand:Milk Fever;
+                tremors:Milk Fever;
+                twitching:Milk Fever;
+                cold extremities:Milk Fever;
+                decrease milk production:Foot and Mouth Disease,mastitis,bovine tuberculosis;
+                blisters on the mouth:Foot and Mouth Disease (FMD);
+                blisters on the tongue:Foot and Mouth Disease (FMD);
+                blisters on the hooves:Foot and Mouth Disease (FMD);
+                abnormal milk:mastitis;
+                pain during milking:mastitis;
+                swollen mamary gland:mastitis;
+                redness in mamary gland:mastitis;
+                cough:bovine tuberculosis,bovine viral diarrhea,bovine respiratiry disease;
+                weight loss:bovine tuberculosis,paratuberculosis,lumpy skin disease;
+                swelling :blackleg,anthrax;
+                diarrhea:bovine viral diarrhea,anthrax,paratuberculosis;
+                poor growth in calves:bovine viral diarrhea;
+                ulcers in mouth:bovine viral diarrhea;
+                nasal discharge:bovine viral diarrhea,bovine respiratiry disease,lumpy skin disease;
+                anemia:theileriosis;
+                jaundice:theileriosis;
+            `,
+            goat: `
+                fever:PPR (Peste des Petits Ruminants),Goat Pox,Enterotoxemia,anthrax;
+                lameness:PPR (Peste des Petits Ruminants);
+                blisters on the mouth:Goat Pox;
+                drooling:PPR (Peste des Petits Ruminants),theileriosis,milk fever;
+                loss of appetite:Milk Fever,PPR (Peste des Petits Ruminants),Goat Pox,mastitis,foot rot;
+                sudden death:Enterotoxemia;
+                difficulty breathing:PPR (Peste des Petits Ruminants),Enterotoxemia,anthrax,theileriosis;
+                swelling of the neck:PPR (Peste des Petits Ruminants),Goat Pox;
+                swelling of the throat:PPR (Peste des Petits Ruminants),Goat Pox;
+                weakness:PPR (Peste des Petits Ruminants),Milk Fever,Enterotoxemia,endo parasites,coccidiosis;
+                skin rash:Goat Pox,PPR (Peste des Petits Ruminants);
+                staggering:anthrax;
+                trembling:anthrax;
+                convulsion:anthrax;
+                death:anthrax;
+                low milk production:anthrax,endo parasites;
+                swelling in mammary gland:mastitis;
+                high fever:mastitis;
+                lethargy:foot rot;
+                grazing on knees:foot rot;
+                cough:aspergillosis,babesiosis;
+                nasal discharge:aspergillosis,goat pox;
+                pyrexia:aspergillosis;
+                diarrhea:endo parasites,theileriosis;
+                reduced weight gain:endo parasites;
+                loss of hair:ectoparasite;
+                itching:ectoparasite,ring worm;
+                scratches:ectoparasite,ring worm;
+                anemia:babesiosis,coccidiosis,theileriosis;
+                jaundice:babesiosis;
+                dehydration:coccidiosis;
+                loss of weight:coccidiosis,theileriosis;
+                delayed puberty:coccidiosis;
+                abdominal pain:coccidiosis;
+                liver failure:coccidiosis;
+                reluctant to feed:goat pox;
+                swollen eye:goat pox;
+                stiff movement:milk fever;
+                constipation:milk fever;
+            `,
+            polutry: `
+                sneezing:bird flu,newcastle disease,infectious bronchitis,infectious coryza,mycoplasmosis;
+                coughing:bird flu,newcastle disease,infectious bronchitis,infectious coryza,mycoplasmosis;
+                nasal discharge:bird flu,fowl cholera,infectious bronchitis,infectious coryza,mycoplasmosis;
+                diarrhea:bird flu,plague,newcastle disease,infectious bursal disease(gumboro),fowl cholera,coccidiosis;
+                swelling:plague,newcastle disease,bird flu,fowl cholera,infectious bronchitis,infectious coryza;
+                cyanosis:plague,fowl cholera;
+                dehydration:infectious bursal disease(gumboro),coccidiosis;
+                skin lesions:chicken pox;
+                malformed eggs:newcastle disease,infectious bronchitis;
+                drop in egg production:bird flu,newcastle disease,infectious bronchitis,infectious coryza,mycoplasmosis;
+                sudden death:newcastle disease,bird flu,fowl cholera;
+                lack of appetite:bird flu;
+                ruffled feathers:infectious bursal disease(gumboro),coccidiosis;
+                lethargy:infectious bursal disease(gumboro),marek's disease,coccidiosis,infectious bronchitis,avian pox;
+                difficulty in walking:infectious bursal disease(gumboro);
+                paralysis:marek's disease;
+                skin tumors:marek's disease;
+                weight loss:marek's disease,coccidiosis,avian pox;
+                blindness:marek's disease;
+                breathing difficulty:infectious coryza,avian pox;
+                reduced feed and water :infectious coryza,infectious bronchitis;
+                scabs: avian pox;
+                conjunctivities:mycoplasmosis;
+            `
+        };
+
+        function parseSymptomData(paragraph) {
+            const map = {};
+            const lines = paragraph.split(';').map(line => line.trim()).filter(line => line);
+            lines.forEach(line => {
+                const [symptom, diseases] = line.split(':').map(part => part.trim().toLowerCase());
+                if (symptom && diseases) {
+                    map[symptom] = diseases.split(',').map(disease => disease.trim());
+                }
+            });
+            return map;
+        }
+
+        function updateSymptomsDropdown() {
+            const animalType = document.getElementById('animalType').value;
+            const symptomToDiseaseMap = parseSymptomData(symptomDiseaseParagraphs[animalType]);
+            const symptomDropdown = document.getElementById('symptomDropdown');
+
+            symptomDropdown.innerHTML = ""; // Clear previous options
+
+            Object.keys(symptomToDiseaseMap).forEach(symptom => {
+                const option = document.createElement('option');
+                option.value = symptom;
+                option.textContent = symptom;
+                symptomDropdown.appendChild(option);
+            });
+        }
+
+        function checkDisease() {
+            const animalType = document.getElementById('animalType').value;
+            const selectedSymptoms = Array.from(document.getElementById('symptomDropdown').selectedOptions).map(option => option.value);
+            const manualSymptoms = document.getElementById('manualInput').value
+                .split(',')
+                .map(symptom => symptom.trim().toLowerCase())
+                .filter(symptom => symptom);
+
+            const allSymptoms = [...selectedSymptoms, ...manualSymptoms];
+
+            const symptomToDiseaseMap = parseSymptomData(symptomDiseaseParagraphs[animalType]);
+            const diseases = new Set();
+
+            allSymptoms.forEach(symptom => {
+                if (symptomToDiseaseMap[symptom]) {
+                    symptomToDiseaseMap[symptom].forEach(disease => diseases.add(disease));
+                }
+            });
+
+            const diseaseList = document.getElementById('diseaseList');
+            diseaseList.innerHTML = ""; // Clear previous results
+
+            if (diseases.size > 0) {
+                diseases.forEach(disease => {
+                    const li = document.createElement('li');
+                    li.textContent = disease;
+                    diseaseList.appendChild(li);
+                });
+            } else {
+                diseaseList.innerHTML = "<li>No diseases found for the selected symptoms.</li>";
+            }
+        }
+
+        // Initialize the dropdown with the default animal type
+        updateSymptomsDropdown();
+    </script>
+</body>
+</html>

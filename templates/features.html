@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Livestock Disease Detection | Krishi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faq.css') }}">
+    <link rel="icon" type="image/jpg" href="https://media.istockphoto.com/id/503646746/photo/farmer-spreading-fertilizer-in-the-field-wheat.webp?a=1&b=1&s=612x612&w=0&k=20&c=BnR0YEwUlQ7xXQhC3CRce04lqQv6pLWbvS076HCw4DI=">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'as,bn,gu,hi,kn,ml,mr,or,pa,ta,te,ur,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
+</head>
+<body>
+    <nav>
+        <div class="container main-nav flex">
+            <a href="/krishi" class="company-logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" style="width: 150px; height: auto;">
+            </a>
+            
+            <div class="nav-links">
+                <ul class="flex">
+                    
+                    <li><a href="/faq" class="hover-links">Faq</a></li>
+                    <!-- <li><a href="#" class="hover-links">FAQ'S</a></li> -->
+                    <li><a href="/about" class="hover-links">About</a></li>
+                    <!-- <li><a href="#" class="hover-links">Contact</a></li> -->
+                    <li><a href="/login" class="hover-links secondary-button">Sign In</a></li>
+                    <li><a href="/login" class="hover-links primary-button">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container header-section flex">
+            <div class="header-left">
+                <h1>Features </h1>
+                <p>Watch tutorial to know how to use the webapp</p> 
+            </div>
+        </div>
+    </header>
+    <header>
+        <div class="container header-section flex">
+            <div class="header-left">
+                
+    
+                <!-- Video Section -->
+                <video width="640" height="360" controls>
+                    <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Krishi. All rights reserved.</p>
+            <p>Contact us for more details on livestock disease detection services.</p>
+        </div>
+    </footer>
+
+    <script src="krishi.js"></script>
+</body>
+</html>

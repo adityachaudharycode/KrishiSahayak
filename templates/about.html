@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Livestock Disease Detection</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <!-- <link rel="stylesheet" href="krishi.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+    <link rel="icon" type="image/png" href="https://example.com/favicon.png">
+    <script src="https://kit.fontawesome.com/a2293c4ae3.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'as,bn,gu,hi,kn,ml,mr,or,pa,ta,te,ur,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container main-nav flex">
+            <a href="/krishi" class="company-logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" >
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li><a href="#" class="hover-links">Features</a></li>
+                    <li><a href="/faq" class="hover-links">FAQ'S</a></li>
+                    <!-- <li><a href="#" class="hover-links">About</a></li> -->
+                    <!-- <li><a href="#" class="hover-links">Contacts</a></li> -->
+                    <li><a href="/login" class="hover-links secondary-button">Sign In</a></li>
+                    <li><a href="/login" class="hover-links primary-button">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="about-section">
+            <div class="container">
+                <h1 class="section-title">About Livestock Disease Detection</h1>
+                <p class="bhaii">Livestock disease detection is crucial to ensuring the health and productivity of farm animals. Early detection helps prevent the spread of diseases, reduces treatment costs, and improves overall livestock management. Using modern technology, farmers and veterinarians can monitor the health of animals more efficiently and accurately.</p>
+
+                <div class="about-text">
+                    <h2>Why Early Disease Detection Matters</h2>
+                    <p>Early detection of diseases in livestock is vital to maintaining the health of the animals and the productivity of farms. Untreated diseases can spread rapidly among animals, leading to significant economic losses and, in some cases, jeopardizing the health of the entire herd or flock. By detecting diseases early, we can minimize the spread of infection, reduce veterinary treatment costs, and ensure that animals remain healthy and productive.</p>
+                </div>
+
+                <div class="about-text">
+                    <h2>Technologies Used in Disease Detection</h2>
+                    <p>Modern disease detection technologies are transforming livestock health monitoring. Some of the key methods include:</p>
+                    <ul>
+                        <li><strong>Machine Learning:</strong> Algorithms are trained to detect symptoms or predict the likelihood of diseases based on various health indicators.</li>
+                        <li><strong>Image Recognition:</strong> Cameras and sensors capture visual data from animals that are analyzed for signs of disease or distress.</li>
+                        <li><strong>Wearable Sensors:</strong> Sensors are attached to livestock to track vitals such as temperature, heart rate, and movement, helping to spot early signs of illness.</li>
+                        <li><strong>Biometric Monitoring:</strong> Techniques like blood tests, fecal analysis, and saliva sampling are used to detect infections and health abnormalities.</li>
+                    </ul>
+                </div>
+
+                <div class="about-text">
+                    <h2>Benefits of Livestock Disease Detection</h2>
+                    <ul>
+                        <li><strong>Prevention of Epidemics:</strong> Detecting diseases early prevents outbreaks and protects the health of livestock and surrounding animals.</li>
+                        <li><strong>Cost-Effective Management:</strong> Early treatment is usually less expensive than dealing with advanced stages of disease.</li>
+                        <li><strong>Improved Productivity:</strong> Healthy animals lead to better milk production, meat yield, and reproduction rates.</li>
+                        <li><strong>Better Animal Welfare:</strong> Monitoring the health of livestock ensures they are well-cared-for and improves their overall quality of life.</li>
+                    </ul>
+                </div>
+
+                <div class="about-text">
+                    <h2>Future of Livestock Disease Detection</h2>
+                    <p>The future of livestock disease detection is promising with the development of artificial intelligence, robotics, and IoT (Internet of Things) devices. These technologies will make disease detection more accurate, timely, and automated, allowing farmers to manage herds and flocks with minimal effort while ensuring optimal animal health.</p>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms & Conditions</a> |
+                <a href="#">Contact</a>
+            </div>
+            <p>&copy; 2025 Livestock Health Solutions. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="krishi.js"></script>
+</body>
+</html>

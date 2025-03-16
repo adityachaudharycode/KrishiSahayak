@@ -1,0 +1,78 @@
+@media only screen and (max-width: 768px) {
+    footer {
+        height: auto;
+        padding: 20px;
+    }
+
+    footer h1 {
+        font-size: 1.5rem;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+        height: auto;
+    }
+
+    .footer-img img {
+        height: 200px;
+        width: 200px;
+    }
+
+    footer .container form {
+        gap: 10px;
+    }
+
+    footer .inputBox {
+        width: 100%;
+    }
+
+    footer .inputBox input[type="text"],
+    footer .inputBox input[type="email"],
+    footer .inputBox textarea {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    footer .inputBox button {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+
+    .alert {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    footer h1 {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    footer .container {
+        padding: 10px;
+    }
+
+    .footer-img img {
+        height: 150px;
+        width: 150px;
+    }
+
+    footer .inputBox input[type="text"],
+    footer .inputBox input[type="email"],
+    footer .inputBox textarea {
+        font-size: 12px;
+    }
+
+    footer .inputBox button {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .alert {
+        font-size: 12px;
+    }
+}

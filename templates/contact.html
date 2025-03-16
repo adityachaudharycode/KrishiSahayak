@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Krishi Livestock Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="icon" type="image/jpg" href="https://media.istockphoto.com/id/503646746/photo/farmer-spreading-fertilizer-in-the-field-wheat.webp?a=1&b=1&s=612x612&w=0&k=20&c=BnR0YEwUlQ7xXQhC3CRce04lqQv6pLWbvS076HCw4DI=">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'as,bn,gu,hi,kn,ml,mr,or,pa,ta,te,ur,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
+</head>
+<body>
+    <nav>
+        <div class="container main-nav flex">
+            <a href="#" class="company-logo">
+                <img src="https://th.bing.com/th?q=Krishi+Logo.png&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li><a href="#" class="hover-links">Features</a></li>
+                    <li><a href="#" class="hover-links">Services</a></li>
+                    <li><a href="#" class="hover-links">About</a></li>
+                    <li><a href="#" class="hover-links">Contact</a></li>
+                    <li><a href="#" class="hover-links secondary-button">Sign In</a></li>
+                    <li><a href="#" class="hover-links primary-button">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container header-section flex">
+            <div class="header-left">
+                <h1>Contact Us</h1>
+                <p>We're here to help with livestock disease detection. Reach out to us with your queries or feedback.</p>
+            </div>
+            <div class="header-right">
+                <img src="https://media.istockphoto.com/vectors/veterinarian-with-a-cow-and-sheep-health-check-preparing-for-vector-vector-id1319736380?k=20&m=1319736380&s=612x612&w=0&h=0XXTGamJ6qLs0jkd02I6y-_PeFaA_FerF3FtS1FYrX4=" alt="Veterinarian with livestock">
+            </div>
+        </div>
+    </header>
+
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Get in Touch</h2>
+                <p>If you have any questions or would like to learn more about our services, please fill out the form below.</p>
+            </div>
+
+            <form action="connect.php" method="post" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Your Phone Number</label>
+                    <input type="tel" id="number" name="number" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Describe your query or feedback" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="primary-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Krishi. All rights reserved.</p>
+            <p>Contact us for more details on livestock disease detection services.</p>
+        </div>
+    </footer>
+
+    <script src="krishi.js"></script>
+</body>
+</html>

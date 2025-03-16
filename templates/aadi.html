@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction System</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-top: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #003d80;
+        }
+
+        /* Input field focus style */
+        input:focus, select:focus, button:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        /* Results Section */
+        #results {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #results h3 {
+            color: #0056b3;
+        }
+
+        #results p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form, #results {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            form, #results {
+                width: 95%;
+            }
+        }
+    </style>
+    <script>
+        async function predictDisease() {
+            const formData = new FormData();
+            const category = document.getElementById("category").value;
+            const subtype = document.getElementById("subtype").value;
+            const symptoms = document.getElementById("symptoms").value;
+
+            formData.append("category", category);
+            formData.append("subtype", subtype);
+            formData.append("symptoms", symptoms);
+
+            const imageFiles = document.getElementById("imageFiles").files;
+            for (const file of imageFiles) {
+                formData.append("image_files", file);
+            }
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            document.getElementById("results").innerHTML = `
+                <h3>Entered Symptoms:</h3>
+                <p>${result.predicted_symptoms.join(", ")}</p>
+                <h3>Predicted Diseases from Images:</h3>
+                <p>${result.predicted_image_diseases.join(", ")}</p>
+                <h3>Possible Diseases Result:</h3>
+                <p>${result.combined_diseases.join(", ")}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Disease Prediction System</h1>
+    <form onsubmit="event.preventDefault(); predictDisease();">
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="livestock">Livestock</option>
+            <!-- <option value="plant">Plant</option> -->
+        </select>
+        <br><br>
+
+        <label for="subtype">Subtype:</label>
+        <input type="text" id="subtype" name="subtype" placeholder="e.g., cattle" required>
+        <br><br>
+
+        <label for="symptoms">Enter Symptoms (comma-separated):</label>
+        <input type="text" id="symptoms" name="symptoms" placeholder="e.g., fever, yellowing leaves">
+        <br><br>
+
+        <label for="imageFiles">Upload Images:</label>
+        <input type="file" id="imageFiles" name="image_files" multiple accept="image/*">
+        <br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+    <div id="results"></div>
+</body>
+</html>

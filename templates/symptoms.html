@@ -1,0 +1,92 @@
+
+ <!DOCTYPE html>
+         <html lang="en">
+         <head>
+             <meta charset="UTF-8">
+             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+             <link rel="stylesheet" href="{{ url_for('static', filename='s.css') }}">
+             <title>Disease Symptoms</title>
+             
+             <style>
+                 body {
+                     font-family: Arial, sans-serif;
+                     margin: 20px;
+                 }
+                 h1 {
+                     color: #2c3e50;
+                 }
+                 h2 {
+                     color: #34495e;
+                 }
+                 .disease-list {
+                     margin-bottom: 20px;
+                 }
+                 .disease-list ul {
+                     list-style: none;
+                     padding: 0;
+                 }
+                 .disease-list li {
+                     margin-bottom: 10px;
+                 }
+                 .disease-button {
+                     display: block;
+                     padding: 10px 15px;
+                     background-color: #00ab3f;
+                     color: #fff;
+                     text-align: center;
+                     text-decoration: none;
+                     border-radius: 5px;
+                     transition: background-color 0.3s;
+                 }
+                 .disease-button:hover {
+                     background-color: #e4e4e4;
+                 }
+             </style>
+             <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: 'as,bn,gu,hi,kn,ml,mr,or,pa,ta,te,ur,en',
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    }, 'google_translate_element');
+                }
+            </script>
+            <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
+         </head>
+         <body>
+             <h1>Livestock Disease Symptoms</h1>
+             
+             <div class="disease-list">
+                 <h2>Cattle Diseases</h2>
+                 <ul>
+                     <li><a href="/foot_and_mouth" class="disease-button">Foot and Mouth Disease</a></li>
+                     <li><a href="/anthrax" class="disease-button">Anthrax</a></li>
+                     <li><a href="/hemorrhagic_septicemia" class="disease-button">Hemorrhagic Septicemia (HS)</a></li>
+                     <li><a href="/black_quarter" class="disease-button">Black Quarter (BQ)</a></li>
+                     <li><a href="/milk_fever" class="disease-button">Milk Fever</a></li>
+                 </ul>
+             </div>
+         
+             <div class="disease-list">
+                 <h2>Goat Diseases</h2>
+                 <ul>
+                     <li><a href="/ppr" class="disease-button">PPR</a></li>
+                     <li><a href="/goat_pox" class="disease-button">Goat Pox</a></li>
+                     <li><a href="/milk_fever_goat" class="disease-button">Milk Fever</a></li>
+                     <li><a href="/enterotoxemia" class="disease-button">Enterotoximia</a></li>
+                 </ul>
+             </div>
+         
+             <div class="disease-list">
+                 <h2>Poultry Diseases</h2>
+                 <ul>
+                     <li><a href="/bird_flu" class="disease-button">Bird Flu</a></li>
+                     <li><a href="/plague" class="disease-button">Plague</a></li>
+                     <li><a href="/fowl_cholera" class="disease-button">Fowl Cholera</a></li>
+                     <li><a href="/chicken_pox" class="disease-button">Chicken Pox</a></li>
+                 </ul>
+             </div>
+         </body>
+         </html>
+         

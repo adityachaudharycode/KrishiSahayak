@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDLM Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login to NDLM (DAHD)</h1>
+
+        <!-- NDLM Login Form -->
+        <form id="loginForm">
+            <label for="pashuaadhar">Pashuaadhar:</label>
+            <input type="number" id="pashuaadhar" name="pashuaadhar" required placeholder="Enter Pashuaadhar">
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="number" id="mobile" name="mobile" required placeholder="Enter Mobile Number">
+
+            <label for="otp">OTP:</label>
+            <input type="number" id="otp" name="otp" required placeholder="Enter OTP">
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

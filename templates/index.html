@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Crop Disease Prediction</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='image.css') }}">
+     <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'as,bn,gu,hi,kn,ml,mr,or,pa,ta,te,ur,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div id="google_translate_element" style="text-align: right; margin: 20px;"></div>
+</head>
+ <body>
+     <div class="container">
+       <h1>Upload Image</h1>
+         <p class="description">Select images to upload and analyze</p>
+         <form id="uploadForm" action="/predict" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            
+             <div class="upload-section">
+                 <label for="images">Select  Images:</label>
+                 <input type="file" id="images" name="images" accept="image/*" multiple required>
+             </div>
+             <button class="upload-button" id="uploadButton" type="submit">Submit</button>
+         </form>
+     </div>
+ 
+     <!-- <script>
+         function validateForm() {
+             const files = document.getElementById('images').files;
+             if (files.length !== 4) {
+                 alert("Please select exactly 4 images.");
+                 return false;
+             }
+             return true;
+         }
+     </script> -->
+ </body>
+ </html>
+ 

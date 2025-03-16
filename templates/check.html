@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom and Image-based Disease Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        select, input[type="text"], input[type="file"] {
+            width: 90%;
+            max-width: 500px;
+            margin: 10px auto;
+            display: block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            display: block;
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            background-color: #1d5987;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        ul li {
+            background-color: #ecf0f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+
+        ul li b {
+            color: #2c3e50;
+        }
+
+        #symptomDropdown {
+            height: 100px;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 600px) {
+            select, input[type="text"], input[type="file"], button {
+                width: 95%;
+            }
+
+            ul {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Symptom and Image-based Disease Checker</h1>
+    <label for="animalType">Select Animal Type:</label>
+    <select id="animalType">
+        <option value="cattle">CATTLE</option>
+        <option value="goat">GOAT</option>
+        <option value="poultry">POULTRY</option>
+    </select>
+
+    <label for="symptomDropdown">Select Symptoms:</label>
+    <select id="symptomDropdown" multiple>
+        <!-- Dynamically populated via JS -->
+    </select>
+
+    <label for="manualInput">Or Enter Symptoms Manually (comma-separated):</label>
+    <input type="text" id="manualInput" placeholder="e.g., fever, drooling">
+
+    <label for="imageInput">Upload Images (up to 4):</label>
+    <input type="file" id="imageInput" accept="image/*" multiple>
+
+    <button onclick="checkDisease()">Check Possible Diseases</button>
+
+    <h2>Possible Diseases:</h2>
+    <ul id="diseaseList"></ul>
+
+    <h2>Recommendations:</h2>
+    <ul id="recommendationsList"></ul>
+
+    <script>
+        async function checkDisease() {
+            const animalType = document.getElementById('animalType').value;
+            const symptomDropdown = document.getElementById('symptomDropdown');
+            const selectedSymptoms = Array.from(symptomDropdown.selectedOptions).map(option => option.value);
+            const manualSymptoms = document.getElementById('manualInput').value.split(',').map(s => s.trim()).filter(Boolean);
+            const symptoms = [...selectedSymptoms, ...manualSymptoms];
+            
+            const images = document.getElementById('imageInput').files;
+
+            const formData = new FormData();
+            formData.append('animal_type', animalType);
+            symptoms.forEach(symptom => formData.append('symptoms', symptom));
+            Array.from(images).forEach(image => formData.append('images', image));
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            const diseaseList = document.getElementById('diseaseList');
+            diseaseList.innerHTML = '';
+            result.diseases.forEach(disease => {
+                const li = document.createElement('li');
+                li.textContent = disease;
+                diseaseList.appendChild(li);
+            });
+
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = '';
+            Object.entries(result.recommendations).forEach(([disease, recommendation]) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<b>${disease}</b>: ${recommendation}`;
+                recommendationsList.appendChild(li);
+            });
+        }
+
+        // Populate symptoms dynamically
+        document.getElementById('animalType').addEventListener('change', () => {
+            const animalType = document.getElementById('animalType').value;
+            const symptomDropdown = document.getElementById('symptomDropdown');
+            symptomDropdown.innerHTML = ''; // Clear existing options
+
+            fetch('/get_symptoms?animal_type=' + animalType)
+                .then(response => response.json())
+                .then(data => {
+                    data.symptoms.forEach(symptom => {
+                        const option = document.createElement('option');
+                        option.value = symptom;
+                        option.textContent = symptom;
+                        symptomDropdown.appendChild(option);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
